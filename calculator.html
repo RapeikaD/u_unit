@@ -4,15 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
   <script src="calculator.js"></script>
   <script src="main.js"></script>
   <title>Document</title>
 </head>
-<body>
-  Calculator
-  <input type="text" onchange="calculate(this.value)">
-  <div>
-    Result is <span id="result"></span>
+<body class="body">
+  <h2 class="title">Calculator</h2>
+  <input
+  class="input"
+  type="text"
+  onchange="calculate(this.value)"
+  placeholder="Enter operation, e.g. 1+2">
+  <div id="res">
+    Result is <span id="result">3</span>
   </div>
 </body>
 </html>

@@ -1,0 +1,19 @@
+.body {
+   font-family: 'Montserrat', sans-serif;
+}
+
+.input {
+   font-size: 48px;
+   width: 100%;
+   text-align: center;
+}
+
+.title {
+  text-align: center;
+  font-size: 48px;
+}
+
+#res {
+  font-size: 48px;
+  text-align: center;
+}
