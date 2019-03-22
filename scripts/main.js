@@ -6,8 +6,9 @@ function calculate(inputValue) {
   const numberA = parseInt(numbers[0]);
   const numberB = parseInt(numbers[1]);
 
-  if (Number.isNaN(numberA) || Number.isNaN(numberB) || operation == null) {
-    updateResult('Operation is not recognized');
+  if (Number.isNaN(numberA) || Number.isNaN(numberB) || operation === null) {
+    updateResult('Operation is not recognized')
+    return;
   }
 
   let result;

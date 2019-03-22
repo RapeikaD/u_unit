@@ -1,11 +1,24 @@
 describe('main.js', function() {
   describe('calculate()', function() {
-    xit('calls add()', function() {
 
+    it('calls add()', function() {
+      spyOn(Calculator.prototype, 'add');
+
+      calculate('5+5');
+
+      expect(Calculator.prototype.add).toHaveBeenCalled();
+      expect(Calculator.prototype.add).toHaveBeenCalledWith(5);
+      expect(Calculator.prototype.add).toHaveBeenCalledTimes(2);
     });
 
-    xit('calls subtract()', function() {
+    it('calls subtract()', function() {
+      spyOn(Calculator.prototype, 'subtract');
 
+      calculate('5-5');
+
+      expect(Calculator.prototype.subtract).toHaveBeenCalled();
+      expect(Calculator.prototype.subtract).toHaveBeenCalledWith(5);
+      expect(Calculator.prototype.subtract).not.toHaveBeenCalledTimes(2);
     });
 
     xit('calls multiply()', function() {
@@ -16,8 +29,28 @@ describe('main.js', function() {
 
     });
 
-    xit('validates operation', function() {
+    it('validates operation when 1st number invalid', function() {
+      spyOn(window, 'updateResult');
 
+      calculate('a-4');
+
+      expect(window.updateResult).toHaveBeenCalledWith('Operation is not recognized');
+    });
+
+    it('validates operation when 2nd number invalid', function() {
+      spyOn(window, 'updateResult');
+
+      calculate('5-a');
+
+      expect(window.updateResult).toHaveBeenCalledWith('Operation is not recognized');
+    });
+
+    it('validates operation when operator is not recognized', function() {
+      spyOn(window, 'updateResult');
+
+      calculate('5?4');
+
+      expect(window.updateResult).toHaveBeenCalledWith('Operation is not recognized');
     });
 
     xit('calls updateResult()', function() {
