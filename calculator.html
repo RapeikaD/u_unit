@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
-  <script src="calculator.js"></script>
-  <script src="main.js"></script>
+  <script src="./scripts/calculator.js"></script>
+  <script src="./scripts/main.js"></script>
   <title>Document</title>
 </head>
 <body class="body">
@@ -20,5 +20,10 @@
   <div id="res">
     Result is <span id="result">3</span>
   </div>
+
+  <div class="vs">version <span id="version"></span></div>
+  <script>
+    window.onload = function() {showVersion()};
+  </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 .body {
    font-family: 'Montserrat', sans-serif;
+   margin-bottom: 50px;
 }
 
 .input {
@@ -16,4 +17,34 @@
 #res {
   font-size: 48px;
   text-align: center;
+}
+
+.container {
+  padding-bottom: 50px;
+  margin-top: 50px;
+}
+
+#req {
+  color:red
+}
+
+#TOU {
+  font-size: 10px;
+}
+
+#smth {
+  margin-bottom: 50px;
+}
+
+#s-up {
+  float: right;
+}
+
+input {
+  border-color: blue;
+}
+
+.vs {
+    text-align: center;
+    color: dimgrey;
 }

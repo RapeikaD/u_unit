@@ -7,32 +7,44 @@ describe('main.js', function() {
       calculate('5+5');
 
       expect(Calculator.prototype.add).toHaveBeenCalled();
-      expect(Calculator.prototype.add).toHaveBeenCalledWith(5);
       expect(Calculator.prototype.add).toHaveBeenCalledTimes(2);
+      expect(Calculator.prototype.add).toHaveBeenCalledWith(5);
     });
 
     it('calls subtract()', function() {
       spyOn(Calculator.prototype, 'subtract');
 
-      calculate('5-5');
+      calculate('10-2');
 
       expect(Calculator.prototype.subtract).toHaveBeenCalled();
-      expect(Calculator.prototype.subtract).toHaveBeenCalledWith(5);
       expect(Calculator.prototype.subtract).not.toHaveBeenCalledTimes(2);
+      expect(Calculator.prototype.subtract).toHaveBeenCalledWith(2);
     });
 
-    xit('calls multiply()', function() {
+    it('calls multiply()', function() {
+      spyOn(Calculator.prototype, 'multiply');
 
+      calculate('8*8');
+
+      expect(Calculator.prototype.multiply).toHaveBeenCalled();
+      expect(Calculator.prototype.multiply).not.toHaveBeenCalledTimes(2);
+      expect(Calculator.prototype.multiply).toHaveBeenCalledWith(8);
     });
 
-    xit('calls divide()', function() {
+    it('calls divide()', function() {
+      spyOn(Calculator.prototype, 'divide');
 
+      calculate('8/8');
+
+      expect(Calculator.prototype.divide).toHaveBeenCalled();
+      expect(Calculator.prototype.divide).toHaveBeenCalledTimes(1);
+      expect(Calculator.prototype.divide).toHaveBeenCalledWith(8);
     });
 
     it('validates operation when 1st number invalid', function() {
       spyOn(window, 'updateResult');
 
-      calculate('a-4');
+      calculate('a-5');
 
       expect(window.updateResult).toHaveBeenCalledWith('Operation is not recognized');
     });
@@ -40,7 +52,7 @@ describe('main.js', function() {
     it('validates operation when 2nd number invalid', function() {
       spyOn(window, 'updateResult');
 
-      calculate('5-a');
+      calculate('5-v');
 
       expect(window.updateResult).toHaveBeenCalledWith('Operation is not recognized');
     });
@@ -48,15 +60,80 @@ describe('main.js', function() {
     it('validates operation when operator is not recognized', function() {
       spyOn(window, 'updateResult');
 
-      calculate('5?4');
+      calculate('9@4');
 
       expect(window.updateResult).toHaveBeenCalledWith('Operation is not recognized');
     });
 
-    xit('calls updateResult()', function() {
+    it('calls updateResult()', function() {
+      spyOn(window, 'updateResult');
 
+      calculate('9*4');
+
+      expect(window.updateResult).toHaveBeenCalledWith(36);
     });
 
+    it('calls updateResult() using .callThrough()', function() {
+      spyOn(window, 'updateResult');
+      spyOn(Calculator.prototype, 'multiply').and.callThrough();
+
+      calculate('9*4');
+
+      expect(window.updateResult).toHaveBeenCalledWith(36);
+    });
+
+
+    // applicable to situations where you want you own function to be called
+    it('calls updateResult() using .callFake()', function() {
+      spyOn(window, 'updateResult');
+      spyOn(Calculator.prototype, 'multiply').and.callFake(function () {
+        return 36
+      });
+
+      calculate('9*4');
+
+      expect(window.updateResult).toHaveBeenCalledWith(36);
+    });
+
+    // applicable to situations where you want you to test specific behavior
+    it('calls updateResult() using .returnValue()', function() {
+      spyOn(window, 'updateResult');
+      spyOn(Calculator.prototype, 'multiply').and.returnValue('value');
+
+      calculate('9*4');
+
+      expect(window.updateResult).toHaveBeenCalledWith('value');
+    });
+
+    // applicable to situations where you want you to perform multiple calls
+    it('calls updateResult() using .returnValues()', function() {
+      spyOn(window, 'updateResult');
+      spyOn(Calculator.prototype, 'add').and.returnValues(null, 'something');
+
+      calculate('9+4');
+
+      expect(window.updateResult).toHaveBeenCalledWith('something');
+    });
+
+    it('does not handle errors', function() {
+      spyOn(Calculator.prototype, 'add').and.throwError('some error');
+
+      expect(function() {calculate('9+4')}).toThrowError('some error');
+    });
+
+  });
+
+  describe('showVersion()', function() {
+    it('should show current version', function() {
+      spyOn(document, 'getElementById').and.returnValue({
+        innerText: null
+      });
+
+      const spy = spyOnProperty(Calculator.prototype, 'version', 'get');
+      showVersion();
+
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
   describe('updateResult()', function() {
@@ -70,7 +147,6 @@ describe('main.js', function() {
 
     afterAll(function() {
       const element = document.getElementById('result');
-
       document.body.removeChild(element);
     });
 

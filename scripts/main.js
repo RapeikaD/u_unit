@@ -7,7 +7,7 @@ function calculate(inputValue) {
   const numberB = parseInt(numbers[1]);
 
   if (Number.isNaN(numberA) || Number.isNaN(numberB) || operation === null) {
-    updateResult('Operation is not recognized')
+    updateResult('Operation is not recognized');
     return;
   }
 
@@ -28,7 +28,7 @@ function calculate(inputValue) {
 
   updateResult(result);
   //document.getElementById('result').innerHTML = result;
-};
+}
 
 function updateResult(result) {
   const element = document.getElementById('result');
@@ -36,4 +36,10 @@ function updateResult(result) {
   if (element) {
     element.innerText = result;
   }
-};
+}
+
+function showVersion() {
+  let calculator = new Calculator();
+
+  document.getElementById('version').innerText = calculator.version;
+}

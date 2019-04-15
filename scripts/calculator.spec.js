@@ -7,7 +7,6 @@ describe('calculator.js', function() {
     });
     
     it('can overwrite total', function() {
-      calculator.total = null;
 
       expect(calculator.total).toBeNull();
     });
