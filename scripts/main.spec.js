@@ -129,7 +129,11 @@ describe('main.js', function() {
         innerText: null
       });
 
-      const spy = spyOnProperty(Calculator.prototype, 'version', 'get');
+      let spy = spyOnProperty(Calculator.prototype, 'version', 'get').and.returnValue(
+          Promise.resolve(
+              new Response('{"version":"0.1"}')
+          )
+      );
       showVersion();
 
       expect(spy).toHaveBeenCalled();

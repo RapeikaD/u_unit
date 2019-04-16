@@ -82,5 +82,19 @@ describe('calculator.js', function() {
         expect(function() {calculator.divide(0)}).toThrowError(Error, 'Cannot divide by 0');
       });
     });
+
+    describe('get "version"', function() {
+      it('should fetch version', function(done) {
+        spyOn(window, 'fetch').and.returnValue(Promise.resolve(
+           new Response('{ "version" :"0.1" }')
+        ));
+
+           calculator.version
+               .then(function(version) {
+                 expect(version).toBe('0.1');
+                 done()
+               })
+      });
+    });
   });
 });

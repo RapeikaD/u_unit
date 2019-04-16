@@ -41,5 +41,8 @@ function updateResult(result) {
 function showVersion() {
   let calculator = new Calculator();
 
-  document.getElementById('version').innerText = calculator.version;
+  calculator.version
+      .then(function(version) {
+          document.getElementById('version').innerText = version;
+      });
 }
